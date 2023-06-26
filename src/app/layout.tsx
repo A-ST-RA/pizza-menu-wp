@@ -1,0 +1,45 @@
+import '@/styles/index.sass';
+
+import { Roboto } from 'next/font/google';
+import React, { ReactNode } from 'react';
+
+import ReactQueryProvider from '@/providers/react-query';
+import StoreProvider from '@/providers/store';
+
+export const metadata = {
+    title: 'Nextjs Starter',
+    description: 'Default starter for projects',
+};
+
+const roboto = Roboto({
+    weight: ['400', '500', '700'],
+    subsets: ['latin'],
+    display: 'swap',
+    style: 'normal',
+    fallback: [
+        'system-ui',
+        'Segoe UI',
+        'Roboto',
+        'Helvetica',
+        'Arial',
+        'sans-serif',
+        'Apple Color Emoji',
+        'Segoe UI Emoji',
+        'Segoe UI Symbol',
+    ],
+    variable: '--font-roboto',
+});
+
+export default function RootLayout({ children }: { children: ReactNode }) {
+    return (
+        <html lang="ru" className={`${roboto.variable}`}>
+            <body>
+                <main>
+                    <ReactQueryProvider>
+                        <StoreProvider>{children}</StoreProvider>
+                    </ReactQueryProvider>
+                </main>
+            </body>
+        </html>
+    );
+}
